@@ -70,6 +70,132 @@ const About = ({ activePage }) => {
           and comprehensive database design. I continually strive to build
           systems that are highly optimized, modular, and performant.
         </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            marginTop: "25px",
+            padding: "15px 20px",
+            background: "var(--border-gradient-onyx)",
+            borderRadius: "14px",
+            border: "1px solid var(--jet)",
+            width: "fit-content",
+          }}
+        >
+          <span
+            style={{
+              color: "var(--light-gray)",
+              fontSize: "15px",
+              fontWeight: "500",
+              marginRight: "10px",
+            }}
+          >
+            Connect with me:
+          </span>
+
+          <a
+            href="https://github.com/saheb142003"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "38px",
+              height: "38px",
+              borderRadius: "50%",
+              background: "var(--eerie-black-1)",
+              border: "1px solid var(--jet)",
+              transition: "all 0.3s ease",
+              color: "#F0F6FC",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.borderColor =
+                "var(--orange-yellow-crayola)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "var(--jet)";
+            }}
+          >
+            <ion-icon
+              name="logo-github"
+              style={{ fontSize: "20px" }}
+            ></ion-icon>
+          </a>
+
+          <a
+            href="https://linkedin.com/in/saheb142003"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "38px",
+              height: "38px",
+              borderRadius: "50%",
+              background: "var(--eerie-black-1)",
+              border: "1px solid var(--jet)",
+              transition: "all 0.3s ease",
+              color: "#0A66C2",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.borderColor =
+                "var(--orange-yellow-crayola)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "var(--jet)";
+            }}
+          >
+            <ion-icon
+              name="logo-linkedin"
+              style={{ fontSize: "20px" }}
+            ></ion-icon>
+          </a>
+
+          <a
+            href="https://leetcode.com/u/saheb142003"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LeetCode"
+            title="LeetCode"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "38px",
+              height: "38px",
+              borderRadius: "50%",
+              background: "var(--eerie-black-1)",
+              border: "1px solid var(--jet)",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.borderColor =
+                "var(--orange-yellow-crayola)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "var(--jet)";
+            }}
+          >
+            <img
+              src="https://cdn.simpleicons.org/leetcode/FFA116"
+              alt="LeetCode"
+              width="18"
+              height="18"
+            />
+          </a>
+        </div>
       </section>
 
       <section className="service">

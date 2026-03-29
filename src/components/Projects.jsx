@@ -193,13 +193,22 @@ const Projects = ({ activePage }) => {
           </ul>
         </div>
 
-        <ul className="project-list">
+        <ul
+          className="project-list"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gap: "20px",
+            padding: 0,
+          }}
+        >
           {filteredProjects.map((project) => (
             <li
               className="project-item active"
               data-filter-item
               data-category={project.category.toLowerCase()}
               key={project.id}
+              style={{ listStyleType: "none", margin: 0 }}
             >
               <a
                 href={project.link}
@@ -209,55 +218,169 @@ const Projects = ({ activePage }) => {
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
+                  background: "var(--border-gradient-onyx)",
+                  border: "1px solid var(--jet)",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  textDecoration: "none",
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                  transition:
+                    "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 25px rgba(0,0,0,0.4)";
+                  e.currentTarget.style.borderColor =
+                    "var(--orange-yellow-crayola)";
+
+                  const overlay =
+                    e.currentTarget.querySelector(".project-overlay");
+                  if (overlay) overlay.style.opacity = 1;
+
+                  const icon = e.currentTarget.querySelector(
+                    ".project-icon-wrapper",
+                  );
+                  if (icon) icon.style.transform = "scale(1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 10px rgba(0,0,0,0.2)";
+                  e.currentTarget.style.borderColor = "var(--jet)";
+
+                  const overlay =
+                    e.currentTarget.querySelector(".project-overlay");
+                  if (overlay) overlay.style.opacity = 0;
+
+                  const icon = e.currentTarget.querySelector(
+                    ".project-icon-wrapper",
+                  );
+                  if (icon) icon.style.transform = "scale(0.5)";
                 }}
               >
-                <figure className="project-img">
-                  <div className="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
+                <figure
+                  style={{
+                    margin: 0,
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "16/9",
+                    overflow: "hidden",
+                    borderBottom: "1px solid var(--jet)",
+                  }}
+                >
+                  {/* Modern Overlay */}
+                  <div
+                    className="project-overlay"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      background: "rgba(0, 0, 0, 0.45)",
+                      backdropFilter: "blur(4px)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
+                      zIndex: 2,
+                    }}
+                  >
+                    <div
+                      className="project-icon-wrapper"
+                      style={{
+                        background: "var(--orange-yellow-crayola)",
+                        borderRadius: "50%",
+                        width: "50px",
+                        height: "50px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 4px 15px rgba(0,0,0,0.5)",
+                        transform: "scale(0.5)",
+                        transition:
+                          "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                      }}
+                    >
+                      <ion-icon
+                        name="eye"
+                        style={{
+                          color: "var(--eerie-black-1)",
+                          fontSize: "24px",
+                        }}
+                      ></ion-icon>
+                    </div>
                   </div>
-                  <img src={project.img} alt={project.title} loading="lazy" />
+
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    loading="lazy"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.5s ease",
+                    }}
+                  />
                 </figure>
 
                 <div
                   style={{
-                    padding: "0 5px",
+                    padding: "15px",
                     display: "flex",
                     flexDirection: "column",
                     flexGrow: 1,
                   }}
                 >
-                  <h3
-                    className="project-title"
-                    style={{ marginTop: "15px", textTransform: "capitalize" }}
-                  >
-                    {project.title}
-                  </h3>
                   <p
-                    className="project-category"
-                    style={{ marginBottom: "15px" }}
+                    style={{
+                      marginBottom: "6px",
+                      color: "var(--light-gray)",
+                      fontSize: "12px",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                    }}
                   >
                     {project.category}
                   </p>
+
+                  <h3
+                    style={{
+                      marginBottom: "12px",
+                      textTransform: "capitalize",
+                      color: "var(--white-2)",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {project.title}
+                  </h3>
 
                   <div
                     style={{
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "6px",
-                      marginBottom: "15px",
+                      gap: "5px",
+                      marginBottom: "12px",
                     }}
                   >
                     {project.stack.split(", ").map((tech, i) => (
                       <span
                         key={i}
                         style={{
-                          background: "var(--border-gradient-onyx)",
-                          border: "1px solid var(--jet)",
+                          background: "rgba(255, 219, 112, 0.1)",
+                          border: "1px solid rgba(255, 219, 112, 0.25)",
                           color: "var(--orange-yellow-crayola)",
-                          fontSize: "11px",
-                          padding: "4px 8px",
-                          borderRadius: "4px",
-                          fontWeight: "600",
+                          fontSize: "10px",
+                          padding: "3px 8px",
+                          borderRadius: "100px",
+                          fontWeight: "500",
                         }}
                       >
                         {tech}
@@ -268,13 +391,14 @@ const Projects = ({ activePage }) => {
                   <ul
                     style={{
                       fontSize: "13px",
-                      color: "var(--light-gray)",
-                      paddingLeft: "14px",
+                      color: "var(--light-gray-70)",
+                      paddingLeft: "15px",
                       listStyleType: "circle",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "8px",
-                      marginBottom: "20px",
+                      gap: "6px",
+                      marginBottom: "15px",
+                      opacity: 0.9,
                     }}
                   >
                     {project.points.map((pt, i) => (
@@ -290,22 +414,21 @@ const Projects = ({ activePage }) => {
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "8px",
-                      color: "var(--white-2)",
                       fontSize: "14px",
                       fontWeight: "600",
-                      padding: "10px 0",
+                      paddingTop: "15px",
                       borderTop: "1px solid var(--jet)",
                       width: "100%",
+                      transition: "color 0.3s ease",
+                      color: "var(--orange-yellow-crayola)",
                     }}
                   >
-                    <span style={{ color: "var(--orange-yellow-crayola)" }}>
-                      Live Demo
-                    </span>{" "}
+                    View Project
                     <ion-icon
-                      name="open-outline"
+                      name="arrow-forward-outline"
                       style={{
                         fontSize: "16px",
-                        color: "var(--orange-yellow-crayola)",
+                        transform: "translateY(1px)",
                       }}
                     ></ion-icon>
                   </div>
