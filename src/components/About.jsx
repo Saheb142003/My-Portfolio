@@ -3,14 +3,6 @@ import { GitHubCalendar } from "react-github-calendar";
 import { ActivityCalendar } from "react-activity-calendar";
 
 const About = ({ activePage }) => {
-  const [modalData, setModalData] = useState({
-    isOpen: false,
-    avatar: "",
-    title: "",
-    date: "",
-    text: "",
-  });
-
   const [leetCodeData, setLeetCodeData] = useState([]);
   const [loadingLeetCode, setLoadingLeetCode] = useState(true);
 
@@ -62,44 +54,6 @@ const About = ({ activePage }) => {
       .catch((err) => console.error("Error fetching LeetCode data", err))
       .finally(() => setLoadingLeetCode(false));
   }, []);
-
-  const testimonials = [
-    {
-      avatar: "/assets/images/avatar-1.png",
-      title: "Daniel lewis",
-      date: "14 June, 2021",
-      text: "Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.",
-    },
-    {
-      avatar: "/assets/images/avatar-2.png",
-      title: "Jessica miller",
-      date: "14 June, 2021",
-      text: "Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.",
-    },
-    {
-      avatar: "/assets/images/avatar-3.png",
-      title: "Emily evans",
-      date: "14 June, 2021",
-      text: "Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.",
-    },
-    {
-      avatar: "/assets/images/avatar-4.png",
-      title: "Henry william",
-      date: "14 June, 2021",
-      text: "Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.",
-    },
-  ];
-
-  const openModal = (testimonial) => {
-    setModalData({
-      isOpen: true,
-      ...testimonial,
-    });
-  };
-
-  const closeModal = () => {
-    setModalData({ ...modalData, isOpen: false });
-  };
 
   return (
     <article
