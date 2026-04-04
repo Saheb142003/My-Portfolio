@@ -534,6 +534,46 @@ main {
   margin-bottom: 15px;
 }
 
+.calendar-scroll-box {
+  width: 100%;
+}
+
+.calendar-inner {
+  width: 100%;
+}
+
+.calendar-inner svg {
+  width: 100% !important;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .calendar-scroll-box {
+    overflow-x: auto;
+    padding-bottom: 15px;
+  }
+  .calendar-scroll-box::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .calendar-scroll-box::-webkit-scrollbar-track {
+    background: var(--onyx);
+    border-radius: 5px;
+  }
+  .calendar-scroll-box::-webkit-scrollbar-thumb {
+    background: var(--orange-yellow-crayola);
+    border-radius: 5px;
+  }
+  .calendar-scroll-box::-webkit-scrollbar-button {
+    width: 20px;
+  }
+  .calendar-inner {
+    min-width: 700px;
+    width: max-content;
+    margin: 0 auto;
+  }
+}
+
 /**
  * #service 
  */

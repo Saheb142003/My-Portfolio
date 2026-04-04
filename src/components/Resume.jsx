@@ -34,7 +34,7 @@ const Resume = ({ activePage }) => {
         { name: "Node.js", icon: "logo-nodejs", color: "#339933" },
         { name: "Express.js", icon: "server-outline", color: "#FFFFFF" },
         { name: "MongoDB", icon: "leaf-outline", color: "#47A248" },
-        { name: "MySQL", icon: "database-outline", color: "#4479A1" },
+        { name: "MySQL", icon: "MySQL", color: "#4479A1" },
         {
           name: "REST APIs",
           icon: "swap-horizontal-outline",
@@ -320,7 +320,14 @@ const Resume = ({ activePage }) => {
                       e.currentTarget.style.borderColor = "var(--jet)";
                     }}
                   >
-                    {skill.icon === "Vercel" ? (
+                    {skill.icon === "MySQL" ? (
+                      <img
+                        src="https://cdn.simpleicons.org/mysql/4479A1"
+                        alt="MySQL"
+                        width="18"
+                        height="18"
+                      />
+                    ) : skill.icon === "Vercel" ? (
                       <img
                         src="https://cdn.simpleicons.org/vercel/white"
                         alt="Vercel"

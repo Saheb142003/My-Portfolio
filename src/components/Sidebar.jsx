@@ -49,11 +49,8 @@ const Sidebar = () => {
             </div>
             <div className="contact-info">
               <p className="contact-title">Email</p>
-              <a
-                href="mailto:sahebuddina.cse.jisu22@gmail.com"
-                className="contact-link"
-              >
-                sahebuddina.cse.jisu22@gmail.com
+              <a href="mailto:saheb142003@gmail.com" className="contact-link">
+                saheb142003@gmail.com
               </a>
             </div>
           </li>

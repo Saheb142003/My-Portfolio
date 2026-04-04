@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { GitHubCalendar } from "react-github-calendar";
+import { ActivityCalendar } from "react-activity-calendar";
 
 const About = ({ activePage }) => {
   const [modalData, setModalData] = useState({
@@ -8,6 +10,58 @@ const About = ({ activePage }) => {
     date: "",
     text: "",
   });
+
+  const [leetCodeData, setLeetCodeData] = useState([]);
+  const [loadingLeetCode, setLoadingLeetCode] = useState(true);
+
+  // Fetch LeetCode Data and prepare an array for 365 Days
+  useEffect(() => {
+    fetch("https://leetcode-stats-api.herokuapp.com/saheb142003")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.submissionCalendar) {
+          const parsedData = data.submissionCalendar;
+
+          const today = new Date();
+          const oneYearAgo = new Date();
+          oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+          const calendarData = [];
+          for (
+            let d = new Date(oneYearAgo);
+            d <= today;
+            d.setDate(d.getDate() + 1)
+          ) {
+            calendarData.push({
+              date: d.toISOString().split("T")[0],
+              count: 0,
+              level: 0,
+            });
+          }
+
+          const mappedData = {};
+          Object.keys(parsedData).forEach((timestamp) => {
+            const dateStr = new Date(timestamp * 1000)
+              .toISOString()
+              .split("T")[0];
+            mappedData[dateStr] = parsedData[timestamp];
+          });
+
+          const finalData = calendarData.map((day) => {
+            const count = mappedData[day.date] || 0;
+            return {
+              date: day.date,
+              count: count,
+              level: count >= 4 ? 4 : count === 3 ? 3 : count >= 1 ? 2 : 0,
+            };
+          });
+
+          setLeetCodeData(finalData);
+        }
+      })
+      .catch((err) => console.error("Error fetching LeetCode data", err))
+      .finally(() => setLoadingLeetCode(false));
+  }, []);
 
   const testimonials = [
     {
@@ -269,6 +323,145 @@ const About = ({ activePage }) => {
             </div>
           </li>
         </ul>
+      </section>
+
+      {/* LEETCODE CALENDAR SECTION */}
+      <section className="heatmap-section" style={{ marginBottom: "40px" }}>
+        <div
+          className="title-wrapper"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            marginBottom: "25px",
+          }}
+        >
+          <h3 className="h3" style={{ margin: 0, display: "flex" }}>
+            Coding Activity accross
+            <span
+              style={{
+                marginLeft: "15px",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                color: "var(--orange-yellow-crayola)",
+              }}
+            >
+              <a
+                href="https://leetcode.com/u/saheb142003"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LeetCode"
+                title="LeetCode"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "50%",
+                  background: "var(--eerie-black-1)",
+                  border: "1px solid var(--jet)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.borderColor =
+                    "var(--orange-yellow-crayola)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.borderColor = "var(--jet)";
+                }}
+              >
+                <img
+                  src="https://cdn.simpleicons.org/leetcode/FFA116"
+                  alt="LeetCode"
+                  width="18"
+                  height="18"
+                />
+              </a>
+              <a
+                href="https://github.com/saheb142003"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "50%",
+                  background: "var(--eerie-black-1)",
+                  border: "1px solid var(--jet)",
+                  transition: "all 0.3s ease",
+                  color: "#F0F6FC",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.borderColor =
+                    "var(--orange-yellow-crayola)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.borderColor = "var(--jet)";
+                }}
+              >
+                <ion-icon
+                  name="logo-github"
+                  style={{ fontSize: "20px" }}
+                ></ion-icon>
+              </a>
+            </span>
+          </h3>
+        </div>
+        <div
+          className="calendar-scroll-box"
+          style={{
+            color: "var(--light-gray)",
+            marginTop: "10px",
+          }}
+        >
+          {loadingLeetCode ? (
+            <p
+              style={{
+                color: "var(--light-gray)",
+                fontStyle: "italic",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              Fetching LeetCode & Github submissions...
+            </p>
+          ) : leetCodeData.length > 0 ? (
+            <div className="calendar-inner">
+              <ActivityCalendar
+                data={leetCodeData}
+                colorScheme="dark"
+                theme={{
+                  dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+                }}
+                labels={{
+                  totalCount: `{{count}} submissions in the last year`,
+                }}
+                blockSize={12}
+                blockMargin={4}
+                fontSize={14}
+              />
+            </div>
+          ) : (
+            <p
+              style={{
+                color: "var(--light-gray)",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              No recent submissions available.
+            </p>
+          )}
+        </div>
       </section>
     </article>
   );
