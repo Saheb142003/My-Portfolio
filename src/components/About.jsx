@@ -8,12 +8,17 @@ const About = ({ activePage }) => {
 
   // Fetch LeetCode Data and prepare an array for 365 Days
   useEffect(() => {
-    fetch("https://leetcode-stats-api.herokuapp.com/saheb142003")
+    // Switching to a more reliable Vercel-based stats API to bypass Heroku CORS limits
+    fetch("https://leetcode-api-faisal.vercel.app/saheb142003")
       .then((res) => res.json())
       .then((data) => {
-        if (data.submissionCalendar) {
-          const parsedData = data.submissionCalendar;
+        // The Faisal API returns submissionCalendar as a JSON string or object
+        const subCalendar =
+          typeof data.submissionCalendar === "string"
+            ? JSON.parse(data.submissionCalendar)
+            : data.submissionCalendar;
 
+        if (subCalendar) {
           const today = new Date();
           const oneYearAgo = new Date();
           oneYearAgo.setFullYear(today.getFullYear() - 1);
@@ -32,11 +37,11 @@ const About = ({ activePage }) => {
           }
 
           const mappedData = {};
-          Object.keys(parsedData).forEach((timestamp) => {
+          Object.keys(subCalendar).forEach((timestamp) => {
             const dateStr = new Date(timestamp * 1000)
               .toISOString()
               .split("T")[0];
-            mappedData[dateStr] = parsedData[timestamp];
+            mappedData[dateStr] = subCalendar[timestamp];
           });
 
           const finalData = calendarData.map((day) => {
@@ -51,7 +56,11 @@ const About = ({ activePage }) => {
           setLeetCodeData(finalData);
         }
       })
-      .catch((err) => console.error("Error fetching LeetCode data", err))
+      .catch((err) => {
+        console.error("Error fetching LeetCode data", err);
+        // Fallback: Show empty calendar instead of error if API fails
+        setLeetCodeData([]);
+      })
       .finally(() => setLoadingLeetCode(false));
   }, []);
 
