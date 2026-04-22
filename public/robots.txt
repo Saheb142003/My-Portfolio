@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saheb142003.netlify.app/sitemap.xml
+

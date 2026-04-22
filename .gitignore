@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Local git safe.directory helper (Codex session)
+.gitconfig_codex
+
+# Prevent accidental commits of installers/binaries
+src/assets/certificates/*.exe
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

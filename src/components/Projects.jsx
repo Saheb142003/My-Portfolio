@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Projects.css";
 import leanstream from "../assets/leanstream.JPG";
 import cravespace from "../assets/cravespace.JPG";
 import bookExchange from "../assets/Book Exchange.JPG";
@@ -8,6 +9,7 @@ import paintSimply from "../assets/paint-simply.JPG";
 import ipTracker from "../assets/IP Address Tracker.JPG";
 import typingGame from "../assets/Typing game.JPG";
 import quizApp from "../assets/quiz app.JPG";
+import todo from "../assets/Todo.JPG";
 
 const Projects = ({ activePage }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -40,20 +42,9 @@ const Projects = ({ activePage }) => {
         "Modular backend services with zero-downtime architecture.",
       ],
     },
+
     {
       id: 3,
-      title: "Book Reselling App",
-      category: "Full-stack",
-      img: bookExchange,
-      link: "https://book-reselling-app.vercel.app/explore",
-      stack: "MERN Stack",
-      points: [
-        "Platform for users to list and buy books with an admin panel.",
-        "Automatic 5% platform fee deduction on every sale.",
-      ],
-    },
-    {
-      id: 4,
       title: "Sujal Insurance Management",
       category: "Full-stack",
       img: sujalInsurance,
@@ -65,7 +56,70 @@ const Projects = ({ activePage }) => {
       ],
     },
     {
-      id: 5,
+      id: 4,
+      title: "Book Reselling App",
+      category: "Full-stack",
+      img: bookExchange,
+      link: "https://book-reselling-app.vercel.app/explore",
+      stack: "MERN Stack",
+      points: [
+        "Platform for users to list and buy books with an admin panel.",
+        "Automatic 5% platform fee deduction on every sale.",
+      ],
+    },
+    {
+      id:5,
+      title: "Todo App",
+      category: "Frontend",
+      img: todo,
+      link:"https://todoapp-saheb142003.netlify.app",
+      stack: "React.js",
+      points: [
+        "Simple yet effective task management application.",
+        "Features include adding, editing, and deleting tasks with local storage persistence.",
+      ],
+    },
+    {
+      id: 6,
+      title: "Skill-X 2024 Quiz",
+      category: "Frontend",
+      img: quizApp,
+      link: "https://skill-x-2024.netlify.app",
+      stack: "HTML, CSS, JavaScript",
+      points: [
+        "Quiz evaluation app built for college Skill-X competition.",
+        "Features dynamic loading of logic questions and score calculation.",
+      ],
+    },
+    {
+      id: 7,
+      title: "Speedy Type",
+      category: "Frontend",
+      img: typingGame,
+      link: "https://speedy-type.netlify.app",
+      stack: "HTML, CSS, JavaScript",
+      points: [
+        "Minimalistic typing test game simulating WPM progression.",
+        "Built purely using native DOM elements and event listeners.",
+      ],
+    },
+
+    {
+      id: 8,
+      title: "Paint-simply",
+      category: "Frontend",
+      img: paintSimply,
+      link: "https://paint-simply.netlify.app",
+      stack: "HTML, CSS, JavaScript",
+      points: [
+        "Browser-based drawing application with a responsive canvas.",
+        "Dynamic brush sizes, colors, and clearing tools.",
+      ],
+    },
+    
+
+    {
+      id: 9,
       title: "X-audios",
       category: "Frontend",
       img: xAudios,
@@ -77,19 +131,7 @@ const Projects = ({ activePage }) => {
       ],
     },
     {
-      id: 6,
-      title: "Paint-simply",
-      category: "Frontend",
-      img: paintSimply,
-      link: "https://paint-simply.netlify.app",
-      stack: "HTML, CSS, JavaScript",
-      points: [
-        "Browser-based drawing application with a responsive canvas.",
-        "Dynamic brush sizes, colors, and clearing tools.",
-      ],
-    },
-    {
-      id: 7,
+      id: 10,
       title: "IP Address Tracker",
       category: "Frontend",
       img: ipTracker,
@@ -100,30 +142,7 @@ const Projects = ({ activePage }) => {
         "Real-time data plotting on an interactive geographic map.",
       ],
     },
-    {
-      id: 8,
-      title: "Speedy Type",
-      category: "Frontend",
-      img: typingGame,
-      link: "https://speedy-type.netlify.app",
-      stack: "HTML, CSS, JavaScript",
-      points: [
-        "Minimalistic typing test game simulating WPM progression.",
-        "Built purely using native DOM elements and event listeners.",
-      ],
-    },
-    {
-      id: 9,
-      title: "Skill-X 2024 Quiz",
-      category: "Frontend",
-      img: quizApp,
-      link: "https://skill-x-2024.netlify.app",
-      stack: "HTML, CSS, JavaScript",
-      points: [
-        "Quiz evaluation app built for college Skill-X competition.",
-        "Features dynamic loading of logic questions and score calculation.",
-      ],
-    },
+   
   ];
 
   const handleFilterClick = (category) => {
@@ -136,7 +155,7 @@ const Projects = ({ activePage }) => {
       ? projects
       : projects.filter(
           (project) =>
-            project.category.toLowerCase() === selectedCategory.toLowerCase(),
+            project.category.toLowerCase() === selectedCategory.toLowerCase()
         );
 
   return (
@@ -193,124 +212,33 @@ const Projects = ({ activePage }) => {
           </ul>
         </div>
 
-        <ul
-          className="project-list"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            gap: "20px",
-            padding: 0,
-          }}
-        >
+        <ul className="project-list projects-list-grid">
           {filteredProjects.map((project) => (
             <li
               className="project-item active"
               data-filter-item
               data-category={project.category.toLowerCase()}
               key={project.id}
-              style={{ listStyleType: "none", margin: 0 }}
             >
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  background: "var(--border-gradient-onyx)",
-                  border: "1px solid var(--jet)",
-                  borderRadius: "16px",
-                  overflow: "hidden",
-                  textDecoration: "none",
-                  boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
-                  transition:
-                    "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
-                  position: "relative",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 25px rgba(0,0,0,0.4)";
-                  e.currentTarget.style.borderColor =
-                    "var(--orange-yellow-crayola)";
-
-                  const overlay =
-                    e.currentTarget.querySelector(".project-overlay");
-                  if (overlay) overlay.style.opacity = 1;
-
-                  const icon = e.currentTarget.querySelector(
-                    ".project-icon-wrapper",
-                  );
-                  if (icon) icon.style.transform = "scale(1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 2px 10px rgba(0,0,0,0.2)";
-                  e.currentTarget.style.borderColor = "var(--jet)";
-
-                  const overlay =
-                    e.currentTarget.querySelector(".project-overlay");
-                  if (overlay) overlay.style.opacity = 0;
-
-                  const icon = e.currentTarget.querySelector(
-                    ".project-icon-wrapper",
-                  );
-                  if (icon) icon.style.transform = "scale(0.5)";
-                }}
+                className="project-card"
               >
                 <figure
-                  style={{
-                    margin: 0,
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "16/9",
-                    overflow: "hidden",
-                    borderBottom: "1px solid var(--jet)",
-                  }}
+                  className="project-figure"
                 >
                   {/* Modern Overlay */}
                   <div
                     className="project-overlay"
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      background: "rgba(0, 0, 0, 0.45)",
-                      backdropFilter: "blur(4px)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      opacity: 0,
-                      transition: "opacity 0.3s ease",
-                      zIndex: 2,
-                    }}
                   >
                     <div
                       className="project-icon-wrapper"
-                      style={{
-                        background: "var(--orange-yellow-crayola)",
-                        borderRadius: "50%",
-                        width: "50px",
-                        height: "50px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        boxShadow: "0 4px 15px rgba(0,0,0,0.5)",
-                        transform: "scale(0.5)",
-                        transition:
-                          "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                      }}
                     >
                       <ion-icon
                         name="eye"
-                        style={{
-                          color: "var(--eerie-black-1)",
-                          fontSize: "24px",
-                        }}
+                        className="project-eye-icon"
                       ></ion-icon>
                     </div>
                   </div>
@@ -319,69 +247,32 @@ const Projects = ({ activePage }) => {
                     src={project.img}
                     alt={project.title}
                     loading="lazy"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      transition: "transform 0.5s ease",
-                    }}
+                    className="project-img"
                   />
                 </figure>
 
                 <div
-                  style={{
-                    padding: "15px",
-                    display: "flex",
-                    flexDirection: "column",
-                    flexGrow: 1,
-                  }}
+                  className="project-body"
                 >
                   <p
-                    style={{
-                      marginBottom: "6px",
-                      color: "var(--light-gray)",
-                      fontSize: "12px",
-                      fontWeight: 500,
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                    }}
+                    className="project-category"
                   >
                     {project.category}
                   </p>
 
                   <h3
-                    style={{
-                      marginBottom: "12px",
-                      textTransform: "capitalize",
-                      color: "var(--white-2)",
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      lineHeight: 1.3,
-                    }}
+                    className="project-title"
                   >
                     {project.title}
                   </h3>
 
                   <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "5px",
-                      marginBottom: "12px",
-                    }}
+                    className="project-tech-list"
                   >
                     {project.stack.split(", ").map((tech, i) => (
                       <span
                         key={i}
-                        style={{
-                          background: "rgba(255, 219, 112, 0.1)",
-                          border: "1px solid rgba(255, 219, 112, 0.25)",
-                          color: "var(--orange-yellow-crayola)",
-                          fontSize: "10px",
-                          padding: "3px 8px",
-                          borderRadius: "100px",
-                          fontWeight: "500",
-                        }}
+                        className="project-tech-chip"
                       >
                         {tech}
                       </span>
@@ -389,47 +280,20 @@ const Projects = ({ activePage }) => {
                   </div>
 
                   <ul
-                    style={{
-                      fontSize: "13px",
-                      color: "var(--light-gray-70)",
-                      paddingLeft: "15px",
-                      listStyleType: "circle",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "6px",
-                      marginBottom: "15px",
-                      opacity: 0.9,
-                    }}
+                    className="project-points"
                   >
                     {project.points.map((pt, i) => (
-                      <li key={i} style={{ lineHeight: "1.5" }}>
-                        {pt}
-                      </li>
+                      <li key={i}>{pt}</li>
                     ))}
                   </ul>
 
                   <div
-                    style={{
-                      marginTop: "auto",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      fontSize: "14px",
-                      fontWeight: "600",
-                      paddingTop: "15px",
-                      borderTop: "1px solid var(--jet)",
-                      width: "100%",
-                      transition: "color 0.3s ease",
-                      color: "var(--orange-yellow-crayola)",
-                    }}
+                    className="project-cta"
                   >
                     View Project
                     <ion-icon
                       name="arrow-forward-outline"
-                      style={{
-                        fontSize: "16px",
-                        transform: "translateY(1px)",
-                      }}
+                      className="project-arrow-icon"
                     ></ion-icon>
                   </div>
                 </div>

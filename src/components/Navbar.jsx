@@ -1,41 +1,51 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-const Navbar = ({ activePage, setActivePage }) => {
+const Navbar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar-list">
         <li className="navbar-item">
-          <button
-            className={`navbar-link ${activePage === "about" ? "active" : ""}`}
-            onClick={() => setActivePage("about")}
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "active" : ""}`
+            }
           >
             About
-          </button>
+          </NavLink>
         </li>
         <li className="navbar-item">
-          <button
-            className={`navbar-link ${activePage === "resume" ? "active" : ""}`}
-            onClick={() => setActivePage("resume")}
+          <NavLink
+            to="/resume"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "active" : ""}`
+            }
           >
             Resume
-          </button>
+          </NavLink>
         </li>
         <li className="navbar-item">
-          <button
-            className={`navbar-link ${activePage === "projects" ? "active" : ""}`}
-            onClick={() => setActivePage("projects")}
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "active" : ""}`
+            }
           >
             Projects
-          </button>
+          </NavLink>
         </li>
 
         <li className="navbar-item">
-          <button
-            className={`navbar-link ${activePage === "contact" ? "active" : ""}`}
-            onClick={() => setActivePage("contact")}
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "active" : ""}`
+            }
           >
             Contact
-          </button>
+          </NavLink>
         </li>
       </ul>
     </nav>

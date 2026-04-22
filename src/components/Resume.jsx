@@ -2,9 +2,9 @@ import React from "react";
 import udemyImg from "../assets/certificates/udemy.jpg";
 import saylorImg from "../assets/certificates/saylor.jpg";
 import nptelImg from "../assets/certificates/nptel.jpg";
-import resumePdf from "../assets/Resume.pdf";
 
 const Resume = ({ activePage }) => {
+  const resumePdf = "/resume.pdf";
   const skillsData = [
     {
       title: "Languages",
