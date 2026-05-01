@@ -133,7 +133,7 @@ const Resume = ({ activePage }) => {
                 // Trigger local download
                 const link = document.createElement("a");
                 link.href = resumePdf;
-                link.download = "Saheb-Resume.pdf";
+                link.download = "Md_Sahebuddin_Resume.pdf";
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
