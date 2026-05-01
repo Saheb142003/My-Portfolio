@@ -18,6 +18,9 @@ dist-ssr
 # Prevent accidental commits of installers/binaries
 src/assets/certificates/*.exe
 
+# Ignore the redundant backup/scaffold folder
+repo-clean/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
